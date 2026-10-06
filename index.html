@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Call Jenn · Wonderful Academy</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f5f7fc;color:#17233d;font:17px/1.6 system-ui,sans-serif;min-height:100vh;display:grid;place-items:center;padding:28px}main{width:min(620px,100%);background:white;border:1px solid #e1e6ef;border-radius:28px;padding:clamp(28px,6vw,60px);box-shadow:0 20px 80px #17233d0b}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#496180;font-weight:700}h1{font-size:clamp(42px,8vw,64px);line-height:1.1;letter-spacing:-.055em;margin:22px 0}p{color:#53637b}.notice{font-size:13px;padding-top:24px;border-top:1px solid #e9edf4;margin-top:32px}#status{font-size:14px;color:#325b88}a{color:#225db7}button{font:inherit;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Wonderful Academy</div>
+    <h1>Call Jenn.</h1>
+    <p>Practice a customer conversation with Jenn, our WonderfulTelco training agent.</p>
+    <p>Open the voice button in the bottom corner, select <strong>Start a call</strong>, and allow your microphone. Headphones work best.</p>
+    <div id="status" role="status">Loading voice controls…</div>
+    <p class="notice">Training conversations are recorded and transcribed in Wonderful. Please use fictional customer details.</p>
+    <noscript>Enable JavaScript to call Jenn.</noscript>
+  </main>
+  <script src="https://cdn.wonderful.ai/chat-sdk/0.7.x/chat-sdk.min.js"></script>
+  <script>
+    (function () {
+      var status = document.getElementById('status');
+      var config = {
+        key: 'wpk_live_yxrKp71qYkI1lTbAFH-Vo-cPk6IDFxLw',
+        agentId: '5081147c-66cc-4ca0-b46c-48555a60d436',
+        baseUrl: 'https://english.api.sb.wonderful.ai',
+        modalities: ['voice'],
+        theme: 'light',
+        launcher: {useAgentLogo: false},
+        appearance: {primary: '#2399fa',primaryForeground: '#ffffff',launcherSurface: '#141414'}
+      };
+      function failed() {status.textContent = 'Voice controls could not load. Please refresh the page and try again.';}
+      function mount() {
+        try {
+          var host = document.createElement('div');
+          document.body.appendChild(host);
+          wonderful.createChat(config, host);
+          status.textContent = 'Voice controls loaded. Open the voice button to begin.';
+        } catch (error) {failed();}
+      }
+      if (!window.wonderful) {failed();return;}
+      wonderful.preload(config).then(mount,mount);
+    })();
+  </script>
+</body>
+</html>
